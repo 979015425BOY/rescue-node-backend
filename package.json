@@ -23,11 +23,15 @@
     "build:prod": "npm run build && npm prune --production",
     "deploy:vercel": "vercel --prod",
     "deploy:railway": "railway up",
+    "deploy:render": "git push origin master",
     "docker:build": "docker build -t nodemysql-api .",
     "docker:run": "docker run -p 3000:3000 --env-file .env nodemysql-api",
     "docker:compose": "docker-compose up -d",
     "health": "curl http://localhost:3000/health || echo 'Service not available'",
-    "prestart:prod": "npm run build"
+    "prestart:prod": "npm run build",
+    "postinstall": "npm run build",
+    "render:build": "npm ci && npm run build",
+    "render:start": "node dist/main"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
