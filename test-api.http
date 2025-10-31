@@ -1,0 +1,45 @@
+### API 测试脚本
+### 基础 URL
+@baseUrl = http://localhost:3000
+
+### 1. 测试用户相关 API
+
+### 创建用户
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "username": "testuser",
+  "email": "test@example.com",
+  "password": "123456"
+}
+
+### 获取所有用户
+GET {{baseUrl}}/users
+
+### 获取单个用户
+GET {{baseUrl}}/users/1
+
+### 更新用户
+PATCH {{baseUrl}}/users/1
+Content-Type: application/json
+
+{
+  "username": "updateduser"
+}
+
+### 删除用户
+DELETE {{baseUrl}}/users/1
+
+### 2. 测试错误处理
+
+### 获取不存在的用户
+GET {{baseUrl}}/users/999
+
+### 创建用户时缺少必填字段
+POST {{baseUrl}}/users
+Content-Type: application/json
+
+{
+  "username": "testuser"
+}
