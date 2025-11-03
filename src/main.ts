@@ -28,7 +28,35 @@ async function createApp() {
 
     // 启用 CORS
     app.enableCors();
-
+    
+    // 为根路径添加欢迎信息
+    app.use('/', (req, res) => {
+      if (req.method === 'GET') {
+        res.status(200).json({
+          success: true,
+          code: 200,
+          message: 'Welcome to Rescue Node API!',
+          data: {
+            documentation: '/api',
+            healthCheck: '/api/health'
+          },
+          timestamp: new Date().toISOString(),
+          path: '/',
+          method: req.method
+        });
+      } else {
+        res.status(404).json({
+          success: false,
+          code: 404,
+          message: `Cannot ${req.method} /`,
+          data: null,
+          timestamp: new Date().toISOString(),
+          path: '/',
+          method: req.method
+        });
+      }
+    });
+    
     // 设置全局路由前缀
     app.setGlobalPrefix('api');
 
